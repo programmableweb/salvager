@@ -1,0 +1,30 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "summary": "Shelby shared an updated to her feed",
+  "type": "Add",
+  "published": "2019-02-26T17:58:43+0000",
+  "actor": {
+    "type": "Person",
+    "id": "http://www.test.example/martin",
+    "name": "Shelby Switzer",
+    "url": "http://shelbyswitzer.com",
+    "image": {
+      "type": "Link",
+      "href": "http://example.org/martin/image.jpg",
+      "mediaType": "image/jpeg"
+    }
+  },
+  "object" : {
+    "id": "http://www.test.example/blog/abc123/xyz",
+    "type": "Article",
+    "url": "http://example.org/blog/2011/02/entry",
+    "name": "Why I love Activity Streams"
+  },
+  "target" : {
+    "id": "http://example.org/blog/",
+    "type": "OrderedCollection",
+    "name": "Martin's Blog"
+  }
+}
+
+{"message"=>"Looking to rent a room in NYC for a few weeks in April. Anyone know of anything?", "privacy"=>{"value"=>"ALL_FRIENDS", "description"=>"Your friends", "friends"=>"", "allow"=>"", "deny"=>""}, "created_time"=>"2019-02-26T17:58:43+0000", "id"=>"10157170274089295_10157149090549295"}
