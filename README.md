@@ -10,6 +10,7 @@ The next steps:
 * Prefix all IDs with a source-specific identifier so that you can combine this data with other datasets (which
 may have conflicting IDs)
 * Include instructions for plugging your salvaged data into decentralized social web apps.
+* Dockerize
 
 ## Installing
 
