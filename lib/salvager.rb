@@ -118,7 +118,6 @@ class Salvager
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = source[0..4] == "https"
 
-    # TODO May need to add access token or use Koala
     response = http.request(
       Net::HTTP::Get.new(uri.request_uri, {
         "User-Agent" => "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0"

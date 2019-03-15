@@ -41,7 +41,9 @@ Add the following variables to that file, inserting your own values:
 ### With Docker
 
 ### Locally
-In a terminal:
+You can run the entire script through a rake task. Open terminal and in the root of this project run: `rake salvage`.
+
+Alternatively, you can mess around with the Salvager Ruby object. In an interactive Ruby console (IRB):
 
     require './lib/salvager'
     s = Salvager.new
