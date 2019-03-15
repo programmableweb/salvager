@@ -8,7 +8,7 @@ describe Salvager do
       salvager.collect_profile
 
 
-      output = File.read "#{ENV["ROOT_PATH"]}/tmp/actor.json"
+      output = File.read "#{ENV["ROOT_PATH"]}/tmp/profile.json"
       expect(output.length).to eq(24)
     end
   end
@@ -19,7 +19,7 @@ describe Salvager do
       salvager.collect_posts
 
 
-      output = File.read "#{ENV["ROOT_PATH"]}/tmp/activity.json"
+      output = File.read "#{ENV["ROOT_PATH"]}/tmp/posts.json"
       expect(output.length).to eq(24)
     end
   end
