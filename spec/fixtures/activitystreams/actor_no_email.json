@@ -1,0 +1,12 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    {"vcard": "http://www.w3.org/2006/vcard/ns#"}
+  ],
+  "type": ["Person", "vcard:Individual"],
+  "id": "https://www.facebook.com/app_scoped_user_id/YXNpZADpBWEdmN2Q5ZA1hFTGxtSnBrczNremxTQ3dmOGFGN21ma2hjSDVQckNEMkRRMk9ZAUnN0WTZAGLUZAwYTBBZA2g1ZA0Q4NXpyOUM5QzdhekFlYVJJdVFJaFdtYi03cG5sQnJhNWtHbmZALczY0cAZDZD/",
+  "name": "Shelby Switzer",
+  "vcard:given-name": "Shelby",
+  "vcard:family-name": "Switzer",
+  "birthday":"01/14/1991"
+}
