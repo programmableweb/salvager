@@ -26,4 +26,17 @@ describe Transformer do
       expect(output_file).to eq(fixture)
     end
   end
+
+  describe "#feed_to_activity" do
+    it "converts feed into ActivityPub Activity JSON" do
+      feed_path = "#{ENV["ROOT_PATH"]}/spec/fixtures/facebook/feed.json"
+      transformer = Transformer.new(feed_path: feed_path)
+
+      transformer.feed_to_activity
+
+      output_file = JSON.parse File.read(transformer.activity_path)
+      fixture = JSON.parse File.read("#{ENV["ROOT_PATH"]}/spec/fixtures/activitystreams/activity.json")
+      expect(output_file).to eq(fixture)
+    end
+  end
 end

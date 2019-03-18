@@ -43,68 +43,42 @@ class Salvager
   end
 
   def collect_profile
+    profile = graph.get_object("me?fields=about,email,id,gender,hometown,first_name,last_name,languages,link,location,address,birthday,age_range,education,name,name_format,middle_name,political,website")
+    @me_id = profile["id"]
+
     path = File.join(output_dir, "profile.json")
     File.open(path, 'wb') do |file|
-      profile = graph.get_object("me?fields=about,email,id,gender,hometown,first_name,last_name,languages,link,location,address,birthday,age_range,education,name,name_format,middle_name,political,website")
-      @me_id = profile["id"]
       file.write profile.to_json
     end
   end
 
   def collect_posts
+    feed = graph.get_connections("me", "posts?fields=event,link,message,name,privacy,created_time,description&limit=500")
     path = File.join(output_dir, "posts.json")
-    File.open(path, 'wb') do |file|
-      feed = graph.get_connections("me", "posts?fields=event,link,message,name,privacy,created_time,description&limit=500")
 
+    File.open(path, 'wb') do |file|
       loop_through_feed(file, feed)
     end
   end
 
   def collect_feed
+    feed = graph.get_connections("me", "feed?fields=id,from{id,link,name},link,description,name,message,backdated_time,caption,call_to_action,coordinates,created_time,event,place,privacy,picture,parent_id,object_id,permalink_url,properties,story,status_type,source,shares,to{id,name},target,type,updated_time&limit=500")
+
     path = File.join(output_dir, "feed.json")
     File.open(path, 'wb') do |file|
-      feed = graph.get_connections("me", "feed?fields=id,from,description,name,message,backdated_time,caption,call_to_action,coordinates,created_time,event,place,privacy,picture,parent_id,object_id,permalink_url,properties,story,status_type,source,shares,to{id,name},target,type,updated_time&limit=500")
-
       loop_through_feed(file, feed)
     end
   end
+
   def collect_albums
     return unless @me_id
-
-    albums_dir = "#{output_dir}/albums"
-    ensure_dir_exists(albums_dir)
 
     albums = graph.graph_call("/#{@me_id}/albums?fields=id,name,created_time,photo_count,photos{name,link,id,images,backdated_time,event,from,created_time,place,name_tags,target,updated_time,comments{id,from,message}},cover_photo,description,updated_time,privacy,location,event,from,backdated_time,place,type,video_count,is_user_facing,likes{id,name},comments{id,from,created_time,message}&limit=150")
 
     path = File.join(output_dir, "albums.json")
     File.open(path, 'wb') do |file|
-
-      while albums do
-        # Write info to file
-        file.write albums.to_json
-
-        # Download album images locally
-        albums.each do |album|
-
-          # Create dir for individual album in "albums" dir
-          single_album_dir = albums_dir + "/" + album["id"]
-          ensure_dir_exists(single_album_dir)
-
-          # Make sure this album has photos
-          # Save an empty dir regardless to be explicit that there are no photos
-          next unless album["photos"] && album["photos"]["data"]
-
-          # Save images
-          album["photos"]["data"].each do |photo|
-            # Just save first image because it's the biggest
-            save_image(photo["id"], photo["images"][0]["source"], single_album_dir)
-          end
-        end
-
-        albums = albums.next_page
-      end
+      loop_through_feed(file, albums, :download_pics)
     end
-
   end
 
   private
@@ -128,10 +102,47 @@ class Salvager
     File.open(image_filename, 'wb') { |f| f.write(response.body) }
   end
 
-  def loop_through_feed(file, feed)
-    while feed do
-      file.write feed.to_json
+  def loop_through_feed(file, feed, additional_action=nil)
+    file.write "["
+    until feed.nil? or feed.empty?
+      str = feed.to_json
+
+      # Don't include brackets of array
+      file.write str[1...-1]
+
+      if additional_action
+        send(additional_action, feed: feed)
+      end
+
       feed = feed.next_page
+      unless feed.nil? or feed.empty?
+        file.write ","
+      end
+    end
+    file.write "]"
+  end
+
+
+  # Download album images locally
+  def download_pics(feed: [])
+    albums_dir = "#{output_dir}/albums"
+    ensure_dir_exists(albums_dir)
+
+    feed.each do |album|
+
+      # Create dir for individual album in "albums" dir
+      single_album_dir = albums_dir + "/" + album["id"]
+      ensure_dir_exists(single_album_dir)
+
+      # Make sure this album has photos
+      # Save an empty dir regardless to be explicit that there are no photos
+      next unless album["photos"] && album["photos"]["data"]
+
+      # Save images
+      album["photos"]["data"].each do |photo|
+        # Just save first image because it's the biggest
+        save_image(photo["id"], photo["images"][0]["source"], single_album_dir)
+      end
     end
   end
 end

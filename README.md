@@ -17,7 +17,7 @@ may have conflicting IDs)
 ### Installing with Docker
 
 ### Installing locally
-Make sure Ruby 2.2.1 and the bundler gem are installed.
+Make sure Ruby 2.4.0 and the bundler gem are installed.
 
 Clone this repo.
 
