@@ -1,106 +1,101 @@
-[{
+{
   "@context": "https://www.w3.org/ns/activitystreams",
-  "summary": "Shelby Switzer shared a mobile status update",
-  "type": "Add",
-  "published": "2019-02-26T17:58:43+0000",
-  "actor": {
-    "id": "https://www.facebook.com/app_scoped_user_id/MNNpZADpBWEdmN2Q5ZA1h",
-    "facebookID": "10157170274089000",
-    "name": "Shelby Switzer"
-  },
-  "audience": {
-    "name": "ALL_FRIENDS",
-    "description": "Your friends"
-  },
-  "target": {
-    "type": "Facebook",
-    "name": "Feed"
-  },
-  "object": {
-    "id": "https://www.facebook.com/10157170274089000/posts/10157149090549111",
-    "facebookID": "10157170274089000_10157149090549111",
-    "type": "Status",
-    "content": "Looking to rent a room for a few weeks in April. Anyone know of anything?",
-    "updated": "2019-02-28T02:04:02+0000"
-  }
-},{
-  "@context": "https://www.w3.org/ns/activitystreams",
-  "summary": "Shelby Switzer shared an added photos update",
-  "type": "Add",
-  "published": "2019-02-19T22:11:16+0000",
-  "actor": {
-    "id": "https://www.facebook.com/app_scoped_user_id/MNNpZADpBWEdmN2Q5ZA1h",
-    "facebookID": "10157170274089000",
-    "name": "Shelby Switzer"
-  },
-  "audience": {
-    "name": "EVERYONE",
-    "description": "Public"
-  },
-  "target": {
-    "type": "Facebook",
-    "name": "Feed"
-  },
-  "object": {
-    "id": "https://www.facebook.com/10157170274089000/posts/10157131857649222",
-    "facebookID": "10157170274089000_10157131857649222",
-    "type": "Photo",
-    "name": "Shelby Switzer",
-    "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/p130x130/52486516_10157131857624000_6208825175731863222_n.jpg?_nc_cat=108&_nc_ht=scontent.xx&oh=1f2632c4192683ee97350fac059c786e&oe=5D0FE2BB",
-    "updated": "2019-02-19T22:57:35+0000"
-  }
-},{
-  "@context": "https://www.w3.org/ns/activitystreams",
-  "summary": "Shelby Switzer shared a shared story update",
-  "type": "Add",
-  "published": "2019-01-25T16:45:38+0000",
-  "actor": {
-    "id": "https://www.facebook.com/app_scoped_user_id/MNNpZADpBWEdmN2Q5ZA1h",
-    "facebookID": "10157170274089000",
-    "name": "Shelby Switzer"
-  },
-  "audience": {
-    "name": "ALL_FRIENDS",
-    "description": "Your friends"
-  },
-  "target": {
-    "type": "Facebook",
-    "name": "Feed"
-  },
-  "object": {
-    "id": "https://www.facebook.com/10157170274089000/posts/10157069390349333",
-    "facebookID": "10157170274089000_10157069390349333",
-    "type": "Link",
-    "name":"What do human rights, open standards, and venture capital have to do with public infrastructure? – Civic Unrest",
-    "content":"https://civicunrest.com/2019/01/25/human-rights-open-standards-venture-capital-public-infrastructure",
-    "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQDDSa7E1kTUd-vJ&w=130&h=130&url=https%3A%2F%2Fcivicunrest.com%2Fimages%2Fviaduct_black_type.png&cfs=1&_nc_hash=AQDg0YC979biUb5Y",
-    "caption":"civicunrest.com",
-    "description":"What so much of the conversation around civic tech boils down to is the question of public/private partnerships. What...",
-    "updated": "2019-01-25T16:45:38+0000"
-  }
-},{
-  "@context": "https://www.w3.org/ns/activitystreams",
-  "summary": "Shelby Switzer shared a mobile status update",
-  "type": "Add",
-  "published": "2018-09-29T15:16:32+0000",
-  "actor": {
-    "id": "https://www.facebook.com/app_scoped_user_id/MNNpZADpBWEdmN2Q5ZA1h",
-    "facebookID": "10157170274089000",
-    "name": "Shelby Switzer"
-  },
-  "audience": {
-    "name": "ALL_FRIENDS",
-    "description": "Your friends"
-  },
-  "target": {
-    "type": "Facebook",
-    "name": "Feed"
-  },
-  "object": {
-    "id": "https://www.facebook.com/10157170274089000/posts/10156775793749444",
-    "facebookID": "10157170274089000_10156775793749444",
-    "type": "Status",
-    "content":"Hi people: If you've been trying to get in touch with me, please know my phone has been dead for a week. Please email or DM for to concoct schemes or share deep secrets.",
-    "updated": "2018-09-30T04:49:33+0000"
-  }
-}]
+  "summary": "Facebook Activity Feed",
+  "type": "Collection",
+  "totalItems": 4,
+  "items": [
+    {
+      "@context": "https://www.w3.org/ns/activitystreams",
+      "summary": "Shelby Switzer shared a mobile status update",
+      "type": "Create",
+      "published": "2019-02-26T17:58:43+0000",
+      "actor": {
+        "id": "https://www.facebook.com/app_scoped_user_id/MNNpZADpBWEdmN2Q5ZA1h",
+        "facebookID": "10157170274089000",
+        "name": "Shelby Switzer"
+      },
+      "audience": {
+        "name": "ALL_FRIENDS",
+        "description": "Your friends"
+      },
+      "object": {
+        "id": "https://www.facebook.com/10157170274089000/posts/10157149090549111",
+        "facebookID": "10157170274089000_10157149090549111",
+        "type": "Status",
+        "content": "Looking to rent a room for a few weeks in April. Anyone know of anything?",
+        "updated": "2019-02-28T02:04:02+0000"
+      }
+    },
+    {
+      "@context": "https://www.w3.org/ns/activitystreams",
+      "summary": "Shelby Switzer shared an added photos update",
+      "type": "Create",
+      "published": "2019-02-19T22:11:16+0000",
+      "actor": {
+        "id": "https://www.facebook.com/app_scoped_user_id/MNNpZADpBWEdmN2Q5ZA1h",
+        "facebookID": "10157170274089000",
+        "name": "Shelby Switzer"
+      },
+      "audience": {
+        "name": "EVERYONE",
+        "description": "Public"
+      },
+      "object": {
+        "id": "https://www.facebook.com/10157170274089000/posts/10157131857649222",
+        "facebookID": "10157170274089000_10157131857649222",
+        "type": "Photo",
+        "name": "Shelby Switzer",
+        "picture": "https://scontent.xx.fbcdn.net/v/t1.0-0/p130x130/52486516_10157131857624000_6208825175731863222_n.jpg?_nc_cat=108&_nc_ht=scontent.xx&oh=1f2632c4192683ee97350fac059c786e&oe=5D0FE2BB",
+        "updated": "2019-02-19T22:57:35+0000"
+      }
+    },
+    {
+      "@context": "https://www.w3.org/ns/activitystreams",
+      "summary": "Shelby Switzer shared a shared story update",
+      "type": "Create",
+      "published": "2019-01-25T16:45:38+0000",
+      "actor": {
+        "id": "https://www.facebook.com/app_scoped_user_id/MNNpZADpBWEdmN2Q5ZA1h",
+        "facebookID": "10157170274089000",
+        "name": "Shelby Switzer"
+      },
+      "audience": {
+        "name": "ALL_FRIENDS",
+        "description": "Your friends"
+      },
+      "object": {
+        "id": "https://www.facebook.com/10157170274089000/posts/10157069390349333",
+        "facebookID": "10157170274089000_10157069390349333",
+        "type": "Link",
+        "name": "What do human rights, open standards, and venture capital have to do with public infrastructure? – Civic Unrest",
+        "content": "https://civicunrest.com/2019/01/25/human-rights-open-standards-venture-capital-public-infrastructure",
+        "picture": "https://external.xx.fbcdn.net/safe_image.php?d=AQDDSa7E1kTUd-vJ&w=130&h=130&url=https%3A%2F%2Fcivicunrest.com%2Fimages%2Fviaduct_black_type.png&cfs=1&_nc_hash=AQDg0YC979biUb5Y",
+        "caption": "civicunrest.com",
+        "description": "What so much of the conversation around civic tech boils down to is the question of public/private partnerships. What...",
+        "updated": "2019-01-25T16:45:38+0000"
+      }
+    },
+    {
+      "@context": "https://www.w3.org/ns/activitystreams",
+      "summary": "Shelby Switzer shared a mobile status update",
+      "type": "Create",
+      "published": "2018-09-29T15:16:32+0000",
+      "actor": {
+        "id": "https://www.facebook.com/app_scoped_user_id/MNNpZADpBWEdmN2Q5ZA1h",
+        "facebookID": "10157170274089000",
+        "name": "Shelby Switzer"
+      },
+      "audience": {
+        "name": "ALL_FRIENDS",
+        "description": "Your friends"
+      },
+      "object": {
+        "id": "https://www.facebook.com/10157170274089000/posts/10156775793749444",
+        "facebookID": "10157170274089000_10156775793749444",
+        "type": "Status",
+        "content": "Hi people: If you've been trying to get in touch with me, please know my phone has been dead for a week. Please email or DM for to concoct schemes or share deep secrets.",
+        "updated": "2018-09-30T04:49:33+0000"
+      }
+    }
+  ]
+}

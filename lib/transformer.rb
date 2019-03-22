@@ -40,16 +40,23 @@ class Transformer
   # This won't be great in the long-term for memory or performance
   def feed_to_activity
     feed = JSON.load File.read(feed_path)
+    feed_size = feed.size
 
     File.open(activity_path, 'wb') do |file|
-      file.write "["
+      # Write Collection elements
+      file.write "{" +
+        "\"@context\": \"https://www.w3.org/ns/activitystreams\"," +
+        "\"summary\": \"Facebook Activity Feed\"," +
+        "\"type\": \"Collection\"," +
+        "\"totalItems\": #{feed_size}," +
+        "\"items\": ["
 
-      last_item_index = feed.size - 1
+      last_item_index = feed_size - 1
       feed.each_with_index do |item, index|
         activity_item = {
           "@context": "https://www.w3.org/ns/activitystreams",
           "summary": summary(item),
-          "type": "Add",
+          "type": "Create",
           "published": item["created_time"],
           "actor": { # Can't set a type for Actor because it could be an organization, group, or non-person entity
             "id": item.dig("from", "link"),
@@ -60,16 +67,12 @@ class Transformer
             "name": item.dig("privacy", "value"),
             "description": item.dig("privacy", "description")
           },
-          "target": {
-            "type": "Facebook",
-            "name": "Feed"
-          }
         }.merge(item_object(item))
         file.write activity_item.to_json
         file.write "," unless index == last_item_index
       end
 
-      file.write "]"
+      file.write "]}"
     end
   end
 
