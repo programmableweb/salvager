@@ -14,10 +14,14 @@ class Salvager
 
   attr_reader :graph, :output_dir, :me_id
 
+  def self.run(args={})
+    new(args).dump
+  end
+
   # Make sure your tokens have the right permissions set
-  def initialize(output_dir: DEFAULT_DIR)
+  def initialize(output_dir: nil)
     @graph = Koala::Facebook::API.new
-    @output_dir = output_dir
+    @output_dir = output_dir || ENV["SALVAGER_OUTPUT_DIR"] || DEFAULT_DIR
     @me_id = nil # this gets set during #collect_profile
   end
 

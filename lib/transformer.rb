@@ -3,13 +3,22 @@ require "json"
 
 class Transformer
   DEFAULT_DIR = "#{ENV["ROOT_PATH"]}/tmp"
-  attr_reader :profile_path, :actor_path, :feed_path, :activity_path
+  attr_accessor :profile_path, :actor_path, :feed_path, :activity_path
 
-  def initialize(profile_path: nil, actor_path: nil, feed_path: nil, activity_path: nil)
-    @profile_path = profile_path || DEFAULT_DIR + "/profile.json"
-    @actor_path = actor_path || DEFAULT_DIR + "/actor.json"
-    @feed_path = feed_path || DEFAULT_DIR + "/feed.json"
-    @activity_path = activity_path || DEFAULT_DIR + "/activity.json"
+  def self.run(args={})
+    transformer = new(args)
+    transformer.profile_to_actor
+    transformer.feed_to_activity
+  end
+
+  def initialize(input_dir: nil, output_dir: nil)
+    input_path = input_dir || ENV["SALVAGER_OUTPUT_DIR"] || DEFAULT_DIR
+    output_path = output_dir || ENV["TRANSFORMER_OUTPUT_DIR"] || DEFAULT_DIR
+
+    @profile_path = input_path + "/profile.json" # File.join()
+    @actor_path = output_path + "/actor.json"
+    @feed_path = input_path + "/feed.json"
+    @activity_path = output_path + "/activity.json"
   end
 
   # TODO check on anything else to be pulled

@@ -2,10 +2,27 @@ require "spec_helper"
 require_relative "#{ENV["ROOT_PATH"]}/lib/transformer"
 
 describe Transformer do
+  describe ".run" do
+   it "transforms profile and feed into ActivityStreams" do
+     input_dir = "#{ENV["ROOT_PATH"]}/spec/fixtures/facebook"
+     output_dir = "#{ENV["ROOT_PATH"]}/tmp/test"
+
+     Transformer.run(input_dir: input_dir, output_dir: output_dir)
+
+     output_actor = JSON.parse File.read("#{ENV["ROOT_PATH"]}/tmp/test/actor.json")
+     output_activity = JSON.parse File.read("#{ENV["ROOT_PATH"]}/tmp/test/activity.json")
+     actor_fixture = JSON.parse File.read("#{ENV["ROOT_PATH"]}/spec/fixtures/activitystreams/actor.json")
+     activity_fixture = JSON.parse File.read("#{ENV["ROOT_PATH"]}/spec/fixtures/activitystreams/activity.json")
+
+     expect(output_actor).to eq(actor_fixture)
+     expect(output_activity).to eq(activity_fixture)
+   end
+  end
+
   describe "#profile_to_actor" do
     it "transforms FB profile into ActivityPub Actor JSON" do
-      profile_path = "#{ENV["ROOT_PATH"]}/spec/fixtures/facebook/profile.json"
-      transformer = Transformer.new(profile_path: profile_path)
+      input_dir = "#{ENV["ROOT_PATH"]}/spec/fixtures/facebook"
+      transformer = Transformer.new(input_dir: input_dir)
 
       transformer.profile_to_actor
 
@@ -15,9 +32,11 @@ describe Transformer do
     end
 
     it "rejects nil fields" do
-      profile_path = "#{ENV["ROOT_PATH"]}/spec/fixtures/facebook/profile_no_email.json"
-      actor_path = "#{ENV["ROOT_PATH"]}/actor_no_email.json"
-      transformer = Transformer.new(profile_path: profile_path, actor_path: actor_path)
+      input_dir = "#{ENV["ROOT_PATH"]}/spec/fixtures/facebook/profile_no_email.json"
+      transformer = Transformer.new(input_dir: input_dir)
+
+      transformer.profile_path = "#{ENV["ROOT_PATH"]}/spec/fixtures/facebook/profile_no_email.json"
+      transformer.actor_path = "#{ENV["ROOT_PATH"]}/actor_no_email.json"
 
       transformer.profile_to_actor
 
@@ -29,8 +48,8 @@ describe Transformer do
 
   describe "#feed_to_activity" do
     it "converts feed into ActivityPub Activity JSON" do
-      feed_path = "#{ENV["ROOT_PATH"]}/spec/fixtures/facebook/feed.json"
-      transformer = Transformer.new(feed_path: feed_path)
+      input_dir = "#{ENV["ROOT_PATH"]}/spec/fixtures/facebook"
+      transformer = Transformer.new(input_dir: input_dir)
 
       transformer.feed_to_activity
 

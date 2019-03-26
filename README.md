@@ -6,11 +6,12 @@ everything locally in a machine readable format (JSON).
 
 The next steps:
 
-* Convert the JSON to standardized format for interoperability
 * Prefix all IDs with a source-specific identifier so that you can combine this data with other datasets (which
 may have conflicting IDs)
 * Include instructions for plugging your salvaged data into decentralized social web apps.
 * Dockerize
+* Add web service API
+* Update tests to use Fake File System gem
 
 ## Installing
 
@@ -32,13 +33,15 @@ Add the following variables to that file, inserting your own values:
     FACEBOOK_APP_SECRET=
     FACEBOOK_CLIENT_TOKEN=
     USER_TOKEN=
-    TEST_USER_ACCESS_TOKEN=
     ROOT_PATH=[path to current working directory]
+    DEFAULT_OUTPUT_DIR=
 
 
 ## Using
 
 ### With Docker
+
+Set envs from above
 
 ### Locally
 You can run the entire script through a rake task. Open terminal and in the root of this project run: `rake salvage`.
