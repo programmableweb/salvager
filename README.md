@@ -11,6 +11,7 @@ may have conflicting IDs)
 * Include instructions for plugging your salvaged data into decentralized social web apps.
 * Add web service API and replace Facebook URLS with API URLS
 * Update tests to use Fake File System gem
+* Stub Facebook requests in salvager specs
 
 ## Installing
 
@@ -41,7 +42,7 @@ You can get these easily by signing up as a developer and creating an app. Once 
  
 Then, to get an OAuth token for your Facebook account, go to the [Graph Explorer](https://developers.facebook.com/tools/explorer/). Once you're in the Graph Explorer, make sure you select the application you just created. Then click "Get Token", then "Get User Access Token". Select the permissions for all the User Data Permissions as well as "user_events" under "Events, Groups & Pages", and then submit the form. The access token will then populate the Access Token text box in the main explorer view. Copy this and use it for the USER_TOKEN below.
 
-Create a `.env` file in the root of this project directory.
+Create a `.env` file in the root of this project directory. See `.env.example.local` for an example.
 Add the following variables to that file, inserting your own values:
 
     FACEBOOK_APP_ID=
@@ -105,6 +106,20 @@ You must get the profile data first before you can collect album data.
 
 ## Running the tests
 
+Set up the tmp and necessary directories. These are all ignored by git. From the root of this project directory:
+
+    mkdir tmp
+    
+    # FACEBOOK_OUTPUT_DIR
+    mkdir tmp/facebook
+    
+    # ACTIVITYSTREAMS_OUTPUT_DIR
+    mkdir tmp/activitystreams
+    
+Make sure that your .env is updated to use the above directories for the corresponding output dir variables. 
+In the future we should stub these env variables or use a `.env.test` file.
+
 Run `rspec spec` in terminal in the root of this directory.
 
-Files get output to the `./tmp/test` directory. You may need to create this directory first for the tests to run.
+Note: Currently the salvager specs fail due to incorrect assertions and because the requests to Facebook aren't stubbed.
+ This is in the to-do list above.
