@@ -9,13 +9,20 @@ The next steps:
 * Prefix all IDs with a source-specific identifier so that you can combine this data with other datasets (which
 may have conflicting IDs)
 * Include instructions for plugging your salvaged data into decentralized social web apps.
-* Dockerize
-* Add web service API
+* Add web service API and replace Facebook URLS with API URLS
 * Update tests to use Fake File System gem
 
 ## Installing
 
 ### Installing with Docker
+Make sure you have [Docker](https://www.docker.com) installed and running on your machine.
+
+Clone this repo.
+
+In command line in the root of this directory:
+
+    # Build the image with the tag "savalger"
+    docker build --tag=salvager .
 
 ### Installing locally
 Make sure Ruby 2.4.0 and the bundler gem are installed.
@@ -24,31 +31,61 @@ Clone this repo.
 
 Run `bundle install` in terminal in the root of this directory.
 
-Set up the env variables:
+## Using
+
+First, you need to set up the env variables. This involves getting a app id, app secret, and 
+user OAuth token from the Facebook developer portal.
+
+You can get these easily by signing up as a developer and creating an app. Once you've done this, you can retrieve your
+ app ID and app secret from the new application's Settings page in the developer portal. 
+ 
+Then, to get an OAuth token for your Facebook account, go to the [Graph Explorer](https://developers.facebook.com/tools/explorer/). Once you're in the Graph Explorer, make sure you select the application you just created. Then click "Get Token", then "Get User Access Token". Select the permissions for all the User Data Permissions as well as "user_events" under "Events, Groups & Pages", and then submit the form. The access token will then populate the Access Token text box in the main explorer view. Copy this and use it for the USER_TOKEN below.
 
 Create a `.env` file in the root of this project directory.
 Add the following variables to that file, inserting your own values:
 
     FACEBOOK_APP_ID=
     FACEBOOK_APP_SECRET=
-    FACEBOOK_CLIENT_TOKEN=
     USER_TOKEN=
     ROOT_PATH=[path to current working directory]
-    DEFAULT_OUTPUT_DIR=
-
-
-## Using
+    FACEBOOK_OUTPUT_DIR=
+    ACTIVITYSTREAMS_OUTPUT_DIR=
 
 ### With Docker
 
-Set envs from above
+Be sure to set the env variables from above in your `.env` file. Check out the `.env.example.docker` file to get the path variables you'll need for the docker container. Copy the values for ROOT_PATH, FACEBOOK_OUTPUT_DIR, and ACTIVITYSTREAMS_OUTPUT_DIR 
+from this file to the corresponding variables in your `.env` file.
+
+Next, run the container, which by default uses the shell script in `script/salvage.sh` and both pulls the Facebook data 
+and transforms it to ActivityStreams using `rake`:
+
+    docker run -it --name salvager-script salvager  
+    
+    
+This may take awhile depending on how much data you have, especially photos. Once this has stopped, your data 
+now lives inside the docker container. If you want to save it and store it to your local machine, copy it over
+to a directory of your choice (`/local/target`):
+    
+    docker cp salvager-script:/usr/src/app/tmp /local/target
 
 ### Locally
-You can run the entire script through a rake task. Open terminal and in the root of this project run: `rake salvage`.
+You can run the entire script through a rake task. Open terminal and in the root of this project run: 
+
+    rake salvage_tranform
+
+This rake task is the same that's used in the docker container, but locally you also have access to other rake tasks: 
+
+    # Just salvage the data from Facebook
+    rake salvage
+    
+    # Transform already salvaged data into ActivityStreams
+    rake transform
+
 
 Alternatively, you can mess around with the Salvager Ruby object. In an interactive Ruby console (IRB):
 
     require './lib/salvager'
+    require './lib/tranformer'
     s = Salvager.new
     
     # You can access the graph directly through the `graph` object:
@@ -61,8 +98,13 @@ Alternatively, you can mess around with the Salvager Ruby object. In an interact
     s.collect_profile
     s.collect_albums
     
+    # Transform the data to ActivityStreams
+    Transform.run
+    
 You must get the profile data first before you can collect album data.
 
 ## Running the tests
 
 Run `rspec spec` in terminal in the root of this directory.
+
+Files get output to the `./tmp/test` directory. You may need to create this directory first for the tests to run.

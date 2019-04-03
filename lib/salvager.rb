@@ -3,8 +3,7 @@ require "koala"
 require "pry"
 
 Koala.configure do |config|
-  config.access_token = ENV["USER_TOKEN"] || ENV["TEST_USER_ACCESS_TOKEN"]
-  config.app_access_token = ENV["FACEBOOK_CLIENT_TOKEN"]
+  config.access_token = ENV["USER_TOKEN"]
   config.app_id = ENV["FACEBOOK_APP_ID"]
   config.app_secret = ENV["FACEBOOK_APP_SECRET"]
 end
@@ -21,7 +20,7 @@ class Salvager
   # Make sure your tokens have the right permissions set
   def initialize(output_dir: nil)
     @graph = Koala::Facebook::API.new
-    @output_dir = output_dir || ENV["SALVAGER_OUTPUT_DIR"] || DEFAULT_DIR
+    @output_dir = output_dir || ENV["FACEBOOK_OUTPUT_DIR"] || DEFAULT_DIR
     @me_id = nil # this gets set during #collect_profile
   end
 
@@ -57,7 +56,7 @@ class Salvager
   end
 
   def collect_posts
-    feed = graph.get_connections("me", "posts?fields=event,link,message,name,privacy,created_time,description&limit=500")
+    feed = graph.get_connections("me", "posts?fields=id,from{id,link,name},to{id,name},event,link,message,name,privacy,created_time,description&limit=500")
     path = File.join(output_dir, "posts.json")
 
     File.open(path, 'wb') do |file|

@@ -12,8 +12,8 @@ class Transformer
   end
 
   def initialize(input_dir: nil, output_dir: nil)
-    input_path = input_dir || ENV["SALVAGER_OUTPUT_DIR"] || DEFAULT_DIR
-    output_path = output_dir || ENV["TRANSFORMER_OUTPUT_DIR"] || DEFAULT_DIR
+    input_path = input_dir || ENV["FACEBOOK_OUTPUT_DIR"] || DEFAULT_DIR
+    output_path = output_dir || ENV["ACTIVITYSTREAMS_OUTPUT_DIR"] || DEFAULT_DIR
 
     @profile_path = input_path + "/profile.json" # File.join()
     @actor_path = output_path + "/actor.json"

@@ -2,16 +2,24 @@ FROM ruby:2.4.0
 
 MAINTAINER Shelby Switzer <shelby@civicunrest.com>
 
-# Run updates
-RUN apt-get update -qq && apt-get install -y build-essential libpq-dev
+RUN gem install bundler -v '2.0.1'
 
-RUN mkdir /salvager
-WORKDIR /salvager
+# Throw errors if Gemfile has been modified since Gemfile.lock
+RUN bundle config --global frozen 1
 
-ADD /Gemfile /salvager/Gemfile
-ADD /Gemfile.lock /salvager/Gemfile.lock
+WORKDIR /usr/src/app
+
+COPY Gemfile Gemfile.lock ./
+
 RUN bundle install
 
-ADD . /salvager
+COPY lib/ lib/
+COPY script/ script/
+COPY .env .env
+COPY Rakefile Rakefile
 
-CMD ["bundle exec", "rake", "salvage_transform"]
+RUN chmod +x ./script/salvage.sh
+
+ENTRYPOINT ["./script/salvage.sh"]
+
+# CMD ["./script/salvage.sh"]

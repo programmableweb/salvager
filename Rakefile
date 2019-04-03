@@ -1,4 +1,5 @@
 require_relative './lib/salvager'
+require_relative './lib/transformer'
 
 task :salvage do
   Salvager.run
