@@ -20,11 +20,6 @@ Make sure you have [Docker](https://www.docker.com) installed and running on you
 
 Clone this repo.
 
-In command line in the root of this directory:
-
-    # Build the image with the tag "savalger"
-    docker build --tag=salvager .
-
 ### Installing locally
 Make sure Ruby 2.4.0 and the bundler gem are installed.
 
@@ -56,6 +51,11 @@ Add the following variables to that file, inserting your own values:
 
 Be sure to set the env variables from above in your `.env` file. Check out the `.env.example.docker` file to get the path variables you'll need for the docker container. Copy the values for ROOT_PATH, FACEBOOK_OUTPUT_DIR, and ACTIVITYSTREAMS_OUTPUT_DIR 
 from this file to the corresponding variables in your `.env` file.
+
+Now, build the image. In command line in the root of this directory:
+
+    # Build the image with the tag "salvager"
+    docker build --tag=salvager .
 
 Next, run the container, which by default uses the shell script in `script/salvage.sh` and both pulls the Facebook data 
 and transforms it to ActivityStreams using `rake`:

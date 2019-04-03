@@ -18,6 +18,10 @@ COPY script/ script/
 COPY .env .env
 COPY Rakefile Rakefile
 
+RUN mkdir tmp/
+RUN mkdir tmp/facebook/
+RUN mkdir tmp/activitystreams
+
 RUN chmod +x ./script/salvage.sh
 
 ENTRYPOINT ["./script/salvage.sh"]
