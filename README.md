@@ -31,6 +31,10 @@ Run `bundle install` in terminal in the root of this directory.
 You can either use our Facebook app (pending approval by FB), or make your own. The benefit of using our app is that if your friends also use and approve our app, the data that you can salvage will include posts from your friends. If you make your own, or your friends do not approve our app, then the data salvaged and transformed will inlude only content you've created.
 
 ### Using our Facebook app
+
+**NOTE: Ths has not been approved yet by FB so will not work for you. Please proceed to next section.**
+
+
 We have created a Facebook app, also called "Salvager", which you can use to generate an access token for Facebook. 
 
 1. Go to our app website: [https://salvager.glitch.me](https://salvager.glitch.me/)
