@@ -13,6 +13,17 @@ may have conflicting IDs)
 * Update tests to use Fake File System gem
 * Stub Facebook requests in salvager specs
 
+## Background
+
+We began this project as part of a feature series for [ProgrammableWeb](https://www.programmableweb.com/) on 
+personal social media data and the social web. The goal of the work is to see how feasible it is to get your own data 
+out of social media giants like Facebook and actually use it in another platform. Getting a data dump as a zip file
+can only get you so far (which is to say, not very), so we used the API to pull useful, structured data, save it locally,
+ and transform it to the most useful alternative data structure, ActivityStreams JSON. Theoretically, now you can plug 
+ you data into the decentralized social web, specifically into any platform or project that uses the ActivityPub 
+ protocols.
+
+
 ## Installing
 
 ### Installing with Docker
@@ -28,11 +39,11 @@ Clone this repo.
 Run `bundle install` in terminal in the root of this directory.
 
 ## Using
-You can either use our Facebook app (pending approval by FB), or make your own. The benefit of using our app is that if your friends also use and approve our app, the data that you can salvage will include posts from your friends. If you make your own, or your friends do not approve our app, then the data salvaged and transformed will inlude only content you've created.
+You can either use our Facebook app (pending approval by FB), or make your own. The benefit of using our app is that if your friends also use and approve our app, the data that you can salvage will include posts from your friends. If you make your own, or your friends do not approve our app, then the data salvaged and transformed will include only content you've created.
 
 ### Using our Facebook app
 
-**NOTE: Ths has not been approved yet by FB so will not work for you. Please proceed to next section.**
+**NOTE: Ths has not been approved yet by Facebook so will not work for you. Please proceed to next section.**
 
 
 We have created a Facebook app, also called "Salvager", which you can use to generate an access token for Facebook. 
@@ -89,7 +100,7 @@ to a directory of your choice (`/local/target`):
 #### Locally
 You can run the entire script through a rake task. Open terminal and in the root of this project run: 
 
-    rake salvage_tranform
+    rake salvage_transform
 
 This rake task is the same that's used in the docker container, but locally you also have access to other rake tasks: 
 
